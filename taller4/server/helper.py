@@ -92,6 +92,7 @@ def print_confusion_and_roc_auc_metrics(model, X_df, y_df):
 
 def get_all_models():
     files = glob.glob(MODELS_PATH + "*" + JOBLIB_EXTENSION)
+    files.sort()
     return files
 
 

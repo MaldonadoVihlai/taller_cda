@@ -69,9 +69,11 @@ def make_predictions(X: List[DataModelPredict]):
     return results
 
 
-@app.post("/predict_bonus/{model_id}")
-async def make_predictions(model_id: str, X: List[DataModelPredict]):
+@app.post("/predict_bonus")
+async def make_predictions(X: List[DataModelPredict], model_id: str = None):
     print("query param: ", model_id)
+    if model_id == None:
+      model_id = ORIGINAL_MODEL.replace('.joblib', '')
     df = pd.DataFrame([x.dict() for x in X])
     processing_pipe = get_processing_pipeline()
     processing_pipe.fit(df)
